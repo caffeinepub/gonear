@@ -1,0 +1,263 @@
+{
+  "kind": "build_request",
+  "title": "Create GoNear job exchange platform with user profiles, matching, swap requests, messaging, and admin panel",
+  "projectName": "GoNear",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement user authentication with Internet Identity integration allowing users to sign up and log in securely",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Sign up and log in"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can sign up using Internet Identity",
+        "Users can log in using Internet Identity",
+        "Authentication state persists across sessions",
+        "Unauthenticated users are redirected to login"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Create user profile data model in backend with fields: name, company name, job role, current city, preferred city, salary range, and experience level",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a profile with: Name, Company Name, Job Role, Current City, Preferred City, Salary Range, Experience"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores user profile with all required fields",
+        "Profile data is associated with user's principal ID",
+        "Salary range is stored as a structured data type",
+        "All fields are required for profile creation"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Build profile creation and editing UI form with input fields for name, company name, job role, current city, preferred city, salary range, and experience",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Create a profile with: Name, Company Name, Job Role, Current City, Preferred City, Salary Range, Experience"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Form includes all required profile fields",
+        "Form validates required fields before submission",
+        "Users can edit their existing profile",
+        "Success and error messages display appropriately",
+        "Form is mobile-friendly"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement matching algorithm in backend that finds users who want to swap jobs where current user's preferred city matches other user's current city, and both share the same company name and job role",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "See matching users who want to swap jobs in the same company and role"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Matching logic compares current city with preferred city bidirectionally",
+        "Matches only occur when company name and job role are identical",
+        "Backend returns list of matching user profiles",
+        "Current user is excluded from their own match results"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Create matches listing UI that displays all matching users with their profile details in a clean, scannable format",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "See matching users who want to swap jobs in the same company and role"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Matches are displayed with key profile information",
+        "UI clearly shows why users match (shared company, role, city swap)",
+        "Empty state shows when no matches exist",
+        "List is responsive and mobile-friendly"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement swap request system in backend allowing users to send, accept, and reject swap requests with status tracking",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Send swap request",
+          "Accept or reject swap request"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can send swap requests to matched users",
+        "Swap requests track sender, recipient, and status (pending, accepted, rejected)",
+        "Users can accept or reject incoming swap requests",
+        "Prevent duplicate requests between same users",
+        "Status updates persist in backend"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Build swap request UI with send request button on match profiles, and inbox showing incoming requests with accept/reject actions",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Send swap request",
+          "Accept or reject swap request"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Users can send swap request from match profile view",
+        "Incoming swap requests display in dedicated inbox",
+        "Accept and reject buttons are clearly visible",
+        "Request status updates in real-time after action",
+        "UI prevents sending duplicate requests"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement in-app messaging system in backend allowing matched users to send and receive text messages with message history storage",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "In-app messaging between matched users"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend stores messages between user pairs",
+        "Messages include sender, recipient, text content, and timestamp",
+        "Users can only message matched users",
+        "Message history is retrievable per conversation",
+        "Messages persist across sessions"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Create messaging UI with conversation list, message thread view, and text input for sending messages between matched users",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "In-app messaging between matched users"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Conversation list shows all message threads",
+        "Message thread displays full conversation history",
+        "Text input allows sending new messages",
+        "Messages display with sender identification and timestamp",
+        "UI is mobile-friendly with smooth scrolling",
+        "New messages appear immediately after sending"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Implement admin role and permissions in backend with ability to view all users, verify profiles, approve users, and block users",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Admin can: View all users, Verify profiles, Approve or block users"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Backend maintains admin role assignments",
+        "Admin functions are protected and only accessible to admin users",
+        "Backend tracks user verification status",
+        "Backend tracks user approval/blocked status",
+        "Admin can retrieve list of all users with their statuses"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Build admin dashboard UI displaying all users in a table with actions to verify profiles, approve users, and block users",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Admin can: View all users, Verify profiles, Approve or block users"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin dashboard is only accessible to admin users",
+        "User table displays key profile information and status",
+        "Verify, approve, and block actions are clearly available",
+        "Status changes reflect immediately in the UI",
+        "Dashboard is mobile-friendly"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Apply a simple, clean, mobile-friendly design system using blue as the primary color with consistent typography, spacing, and component styling throughout the application",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ],
+        "quotes": [
+          "Design should be simple, clean, and mobile-friendly. Primary color: Blue"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Blue is used as the primary brand color for buttons, links, and key UI elements",
+        "Design is responsive and works well on mobile devices",
+        "Typography is clear and readable",
+        "Layout is clean with adequate whitespace",
+        "UI components follow consistent styling patterns"
+      ]
+    }
+  ],
+  "constraints": [
+    "Use Internet Identity for authentication (no third-party auth providers)",
+    "All data must be stored in Motoko backend (no external databases)",
+    "Blue must be the primary color in the design system"
+  ],
+  "nonGoals": [
+    "Email notifications for swap requests or messages",
+    "Real-time WebSocket messaging",
+    "External job board integrations",
+    "Payment or subscription features",
+    "Multi-language support"
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

@@ -1,0 +1,307 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "GoNear Job Exchange Platform - Frontend Implementation",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Implement user authentication with Internet Identity integration allowing users to sign up and log in securely",
+      "acceptanceCriteria": [
+        "Users can sign up using Internet Identity",
+        "Users can log in using Internet Identity",
+        "Authentication state persists across sessions",
+        "Unauthenticated users are redirected to login"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/LoginButton.tsx",
+          "operation": "create",
+          "description": "Create login/logout button component using the authorization component to handle Internet Identity authentication. Use useInternetIdentity hook for login, clear, and identity state. Clear query cache on logout. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/ProfileSetupModal.tsx",
+          "operation": "create",
+          "description": "Create modal component that prompts new users to set up their profile on first login. Show modal when isAuthenticated is true, profile is not loading, profile fetch is complete, and userProfile is null. Use useGetCallerUserProfile hook with proper loading state handling to prevent flash. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useGetCallerUserProfile.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches the current user's profile using getCallerUserProfile backend method. Return combined loading state that accounts for actor fetching and query loading. Enable query only when actor is available. Use React Query with queryKey ['currentUserProfile']. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add authentication check that redirects unauthenticated users to login. Show ProfileSetupModal for authenticated users without profiles. Integrate LoginButton into the header/navigation. Clear application data on logout."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Build profile creation and editing UI form with input fields for name, company name, job role, current city, preferred city, salary range, and experience",
+      "acceptanceCriteria": [
+        "Form includes all required profile fields",
+        "Form validates required fields before submission",
+        "Users can edit their existing profile",
+        "Success and error messages display appropriately",
+        "Form is mobile-friendly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/components/ProfileForm.tsx",
+          "operation": "create",
+          "description": "Create profile form component with fields: name (text), companyName (text), jobRole (text), currentCity (text), preferredCity (text), salaryRange (text), experienceLevel (select: junior/midLevel/senior). Use saveCallerUserProfile backend method to save profile. Include form validation for all required fields. Display success/error messages. Make form responsive and mobile-friendly using Tailwind CSS."
+        },
+        {
+          "path": "frontend/src/pages/ProfilePage.tsx",
+          "operation": "create",
+          "description": "Create profile page that displays and allows editing of the current user's profile. Fetch current profile using useGetCallerUserProfile hook. Show ProfileForm with existing data in edit mode. Include navigation back to main view."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for /profile page in the router configuration. Wire ProfilePage component to the /profile route. Add navigation link to profile in the app header."
+        }
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "summary": "Create matches listing UI that displays all matching users with their profile details in a clean, scannable format",
+      "acceptanceCriteria": [
+        "Matches are displayed with key profile information",
+        "UI clearly shows why users match (shared company, role, city swap)",
+        "Empty state shows when no matches exist",
+        "List is responsive and mobile-friendly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useMatches.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches matching users using findMatches backend method. Return array of Principal IDs. Use React Query with appropriate cache invalidation. Handle loading and error states."
+        },
+        {
+          "path": "frontend/src/hooks/useUserProfile.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches a specific user's profile by Principal using getUserProfile backend method. Accept Principal parameter. Return UserProfile or null. Use React Query for caching."
+        },
+        {
+          "path": "frontend/src/components/MatchCard.tsx",
+          "operation": "create",
+          "description": "Create match card component that displays a matching user's profile information. Show name, company name, job role, current city, preferred city, salary range, and experience level. Highlight the matching criteria (company, role, city swap). Include link/button to view full match details. Make card responsive and mobile-friendly."
+        },
+        {
+          "path": "frontend/src/pages/MatchesPage.tsx",
+          "operation": "create",
+          "description": "Create matches listing page that displays all matching users. Use useMatches hook to get match Principal IDs, then fetch each user's profile with useUserProfile. Display matches using MatchCard components in a grid layout. Show empty state with friendly message when no matches exist. Make page responsive."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for /matches page in the router configuration. Wire MatchesPage component to the /matches route. Add navigation link to matches in the app header."
+        }
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "summary": "Build swap request UI with send request button on match profiles, and inbox showing incoming requests with accept/reject actions",
+      "acceptanceCriteria": [
+        "Users can send swap request from match profile view",
+        "Incoming swap requests display in dedicated inbox",
+        "Accept and reject buttons are clearly visible",
+        "Request status updates in real-time after action",
+        "UI prevents sending duplicate requests"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useSwapRequests.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches all swap requests using getSwapRequests backend method. Return array of SwapRequest objects. Use React Query with cache invalidation after mutations."
+        },
+        {
+          "path": "frontend/src/hooks/useSendSwapRequest.ts",
+          "operation": "create",
+          "description": "Create mutation hook that sends a swap request using sendSwapRequest backend method. Accept recipient Principal parameter. Invalidate swap requests query on success. Handle duplicate request prevention in UI."
+        },
+        {
+          "path": "frontend/src/hooks/useAcceptSwapRequest.ts",
+          "operation": "create",
+          "description": "Create mutation hook that accepts a swap request using acceptSwapRequest backend method. Accept requestId parameter. Invalidate swap requests query on success."
+        },
+        {
+          "path": "frontend/src/hooks/useRejectSwapRequest.ts",
+          "operation": "create",
+          "description": "Create mutation hook that rejects a swap request using rejectSwapRequest backend method. Accept requestId parameter. Invalidate swap requests query on success."
+        },
+        {
+          "path": "frontend/src/components/SendSwapRequestButton.tsx",
+          "operation": "create",
+          "description": "Create button component to send swap request to a matched user. Use useSendSwapRequest mutation hook. Disable button if request already sent (check useSwapRequests for existing request with same recipient). Show loading state during send. Display success/error feedback."
+        },
+        {
+          "path": "frontend/src/components/SwapRequestCard.tsx",
+          "operation": "create",
+          "description": "Create card component to display a single swap request. Show sender profile information fetched via useUserProfile hook. Include accept and reject buttons using useAcceptSwapRequest and useRejectSwapRequest hooks. Display request status (pending/accepted/rejected). Show timestamp."
+        },
+        {
+          "path": "frontend/src/pages/SwapRequestsPage.tsx",
+          "operation": "create",
+          "description": "Create swap requests inbox page showing incoming and outgoing requests. Use useSwapRequests hook to fetch all requests. Filter requests into incoming (to current user) and outgoing (from current user) tabs. Display requests using SwapRequestCard components. Show empty state when no requests exist. Make page responsive."
+        },
+        {
+          "path": "frontend/src/pages/MatchDetailPage.tsx",
+          "operation": "create",
+          "description": "Create match detail page showing full profile of a matched user. Accept Principal parameter from route. Use useUserProfile hook to fetch profile. Display all profile fields. Include SendSwapRequestButton component. Show message button (link to conversation). Make page responsive."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add routes for /swap-requests and /matches/:principal pages in the router configuration. Wire SwapRequestsPage to /swap-requests and MatchDetailPage to /matches/:principal. Add navigation link to swap requests inbox in the app header. Update MatchCard to link to match detail page."
+        }
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "summary": "Create messaging UI with conversation list, message thread view, and text input for sending messages between matched users",
+      "acceptanceCriteria": [
+        "Conversation list shows all message threads",
+        "Message thread displays full conversation history",
+        "Text input allows sending new messages",
+        "Messages display with sender identification and timestamp",
+        "UI is mobile-friendly with smooth scrolling",
+        "New messages appear immediately after sending"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useConversations.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches all conversations using getAllConversations backend method. Return array of Principal IDs representing conversation participants. Use React Query."
+        },
+        {
+          "path": "frontend/src/hooks/useMessages.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches messages with a specific user using getMessagesWith backend method. Accept recipient Principal parameter. Return array of Message objects. Use React Query with cache invalidation after sending."
+        },
+        {
+          "path": "frontend/src/hooks/useSendMessage.ts",
+          "operation": "create",
+          "description": "Create mutation hook that sends a message using sendMessage backend method. Accept recipient Principal and content text parameters. Invalidate messages query on success."
+        },
+        {
+          "path": "frontend/src/components/ConversationListItem.tsx",
+          "operation": "create",
+          "description": "Create list item component for a conversation. Show the other user's name fetched via useUserProfile hook. Display a preview of the last message if available. Include link to open the full conversation thread. Make item clickable and responsive."
+        },
+        {
+          "path": "frontend/src/components/MessageBubble.tsx",
+          "operation": "create",
+          "description": "Create message bubble component to display a single message. Show message content, sender identification (you vs. other user's name), and formatted timestamp. Style differently for sent vs. received messages. Make bubble responsive."
+        },
+        {
+          "path": "frontend/src/components/MessageInput.tsx",
+          "operation": "create",
+          "description": "Create message input component with text input field and send button. Use useSendMessage mutation hook. Clear input after successful send. Handle loading state. Make input mobile-friendly with proper keyboard handling."
+        },
+        {
+          "path": "frontend/src/pages/MessagesPage.tsx",
+          "operation": "create",
+          "description": "Create messages page showing list of all conversations. Use useConversations hook to get conversation participants. Display conversations using ConversationListItem components. Show empty state when no conversations exist. Make page responsive."
+        },
+        {
+          "path": "frontend/src/pages/ConversationPage.tsx",
+          "operation": "create",
+          "description": "Create conversation thread page for messaging with a specific user. Accept recipient Principal parameter from route. Use useMessages hook to fetch message history. Display messages using MessageBubble components with smooth scrolling. Include MessageInput component at bottom. Show other user's name in header using useUserProfile. Auto-scroll to latest message. Make page responsive and mobile-friendly."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add routes for /messages and /messages/:principal pages in the router configuration. Wire MessagesPage to /messages and ConversationPage to /messages/:principal. Add navigation link to messages in the app header. Add message button link from MatchDetailPage to conversation."
+        }
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "summary": "Build admin dashboard UI displaying all users in a table with actions to verify profiles, approve users, and block users",
+      "acceptanceCriteria": [
+        "Admin dashboard is only accessible to admin users",
+        "User table displays key profile information and status",
+        "Verify, approve, and block actions are clearly available",
+        "Status changes reflect immediately in the UI",
+        "Dashboard is mobile-friendly"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/useIsAdmin.ts",
+          "operation": "create",
+          "description": "Create custom hook that checks if current user is admin using isCallerAdmin backend method. Return boolean. Use React Query. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useAllUsers.ts",
+          "operation": "create",
+          "description": "Create custom hook that fetches all users using getAllUsers backend method. Return array of [Principal, UserProfile] tuples. Use React Query with cache invalidation after mutations. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useVerifyProfile.ts",
+          "operation": "create",
+          "description": "Create mutation hook that verifies a user's profile using verifyProfile backend method. Accept user Principal parameter. Invalidate all users query on success. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/hooks/useBlockUser.ts",
+          "operation": "create",
+          "description": "Create mutation hook that blocks a user using blockUser backend method. Accept user Principal parameter. Invalidate all users query on success. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/AccessDeniedScreen.tsx",
+          "operation": "create",
+          "description": "Create access denied screen component to show when unauthorized users try to access admin pages. Display friendly message explaining admin-only access. Include link back to main app. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/UserTableRow.tsx",
+          "operation": "create",
+          "description": "Create table row component for displaying a user in the admin dashboard. Show user's name, company, job role, cities, verification status, and approval/blocked status. Include verify, approve, and block action buttons using useVerifyProfile and useBlockUser hooks. Disable actions appropriately based on current status. Make row responsive."
+        },
+        {
+          "path": "frontend/src/pages/AdminDashboard.tsx",
+          "operation": "create",
+          "description": "Create admin dashboard page showing all users in a table. Use useIsAdmin hook to check authorization; show AccessDeniedScreen if not admin. Use useAllUsers hook to fetch user list. Display users using UserTableRow components in a responsive table. Show loading state during data fetch. Include search/filter functionality. Make dashboard mobile-friendly with horizontal scroll for table on small screens. Verify the authorization component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Add route for /admin page in the router configuration. Wire AdminDashboard component to the /admin route. Add navigation link to admin dashboard in the app header (conditionally shown only to admin users using useIsAdmin hook). Verify the authorization component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "summary": "Apply a simple, clean, mobile-friendly design system using blue as the primary color with consistent typography, spacing, and component styling throughout the application",
+      "acceptanceCriteria": [
+        "Blue is used as the primary brand color for buttons, links, and key UI elements",
+        "Design is responsive and works well on mobile devices",
+        "Typography is clear and readable",
+        "Layout is clean with adequate whitespace",
+        "UI components follow consistent styling patterns"
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Update global styles to define blue primary color palette, consistent typography scale, spacing utilities, and base component styles. Set font family to a clean sans-serif. Define CSS custom properties for primary blue color variants (light, default, dark). Add base styles for body, headings, and links. Ensure mobile-friendly base font sizes and line heights."
+        },
+        {
+          "path": "frontend/tailwind.config.js",
+          "operation": "modify",
+          "description": "Configure Tailwind theme to use blue as the primary color (set colors.primary to blue shades). Define consistent spacing scale, typography settings, and mobile-first responsive breakpoints. Extend default theme with custom primary colors matching the blue design system."
+        },
+        {
+          "path": "frontend/src/components/Layout.tsx",
+          "operation": "create",
+          "description": "Create main layout component providing consistent structure across all pages. Include header with app logo/name, navigation links (matches, messages, swap requests, profile, admin if applicable), and LoginButton component. Include main content area with proper spacing and max-width container. Add footer if needed. Apply blue color to header background or accents. Make layout responsive with mobile-friendly navigation (hamburger menu or bottom nav)."
+        },
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Wrap all routed pages with Layout component to provide consistent design across the application. Ensure blue primary color is applied to navigation elements and buttons throughout."
+        }
+      ]
+    }
+  ]
+}

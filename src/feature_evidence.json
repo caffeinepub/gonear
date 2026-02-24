@@ -1,0 +1,159 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-implement-user-authentication-with-internet-identity-integration-allowing-users-to-sign-up-and-log-in-securely",
+      "featureTitle": "Implement user authentication with Internet Identity integration allowing users to sign up and log in securely",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/LoginButton.tsx",
+        "frontend/src/components/ProfileSetupModal.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-profile-creation-and-editing-ui-form-with-input-fields-for-name-company-name-job-role-current-city-preferred-city-salary-range-and-experience",
+      "featureTitle": "Build profile creation and editing UI form with input fields for name, company name, job role, current city, preferred city, salary range, and experience",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ProfileForm.tsx",
+        "frontend/src/pages/ProfilePage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-matches-listing-ui-that-displays-all-matching-users-with-their-profile-details-in-a-clean-scannable-format",
+      "featureTitle": "Create matches listing UI that displays all matching users with their profile details in a clean, scannable format",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/MatchCard.tsx",
+        "frontend/src/pages/MatchesPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-swap-request-ui-with-send-request-button-on-match-profiles-and-inbox-showing-incoming-requests-with-accept-reject-actions",
+      "featureTitle": "Build swap request UI with send request button on match profiles, and inbox showing incoming requests with accept/reject actions",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/SendSwapRequestButton.tsx",
+        "frontend/src/components/SwapRequestCard.tsx",
+        "frontend/src/pages/MatchDetailPage.tsx",
+        "frontend/src/pages/SwapRequestsPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-7"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-create-messaging-ui-with-conversation-list-message-thread-view-and-text-input-for-sending-messages-between-matched-users",
+      "featureTitle": "Create messaging UI with conversation list, message thread view, and text input for sending messages between matched users",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/ConversationListItem.tsx",
+        "frontend/src/components/MessageBubble.tsx",
+        "frontend/src/components/MessageInput.tsx",
+        "frontend/src/pages/ConversationPage.tsx",
+        "frontend/src/pages/MessagesPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-9"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-build-admin-dashboard-ui-displaying-all-users-in-a-table-with-actions-to-verify-profiles-approve-users-and-block-users",
+      "featureTitle": "Build admin dashboard UI displaying all users in a table with actions to verify profiles, approve users, and block users",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AccessDeniedScreen.tsx",
+        "frontend/src/components/UserTableRow.tsx",
+        "frontend/src/pages/AdminDashboard.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-11"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-apply-a-simple-clean-mobile-friendly-design-system-using-blue-as-the-primary-color-with-consistent-typography-spacing-and-component-styling-throughout-the-application",
+      "featureTitle": "Apply a simple, clean, mobile-friendly design system using blue as the primary color with consistent typography, spacing, and component styling throughout the application",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/Layout.tsx",
+        "frontend/src/index.css",
+        "frontend/tailwind.config.js"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-12"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Job exchange platform called GoNear where users can create profiles with job details and swap jobs with matching users in the same company and role. Includes user authentication, profile management, matching system, swap requests, in-app messaging, and admin panel for user verification and moderation.",
+  "architectural_notes": [
+    "Mobile-friendly responsive design required",
+    "Primary color scheme: Blue",
+    "Simple and clean UI design approach"
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-user-authentication-with-internet-identity-integration-allowing-users-to-sign-up-and-log-in-securely",
+      "title": "Implement user authentication with Internet Identity integration allowing users to sign up and log in securely",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-profile-creation-and-editing-ui-form-with-input-fields-for-name-company-name-job-role-current-city-preferred-city-salary-range-and-experience",
+      "title": "Build profile creation and editing UI form with input fields for name, company name, job role, current city, preferred city, salary range, and experience",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-matches-listing-ui-that-displays-all-matching-users-with-their-profile-details-in-a-clean-scannable-format",
+      "title": "Create matches listing UI that displays all matching users with their profile details in a clean, scannable format",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-swap-request-ui-with-send-request-button-on-match-profiles-and-inbox-showing-incoming-requests-with-accept-reject-actions",
+      "title": "Build swap request UI with send request button on match profiles, and inbox showing incoming requests with accept/reject actions",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-messaging-ui-with-conversation-list-message-thread-view-and-text-input-for-sending-messages-between-matched-users",
+      "title": "Create messaging UI with conversation list, message thread view, and text input for sending messages between matched users",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-admin-dashboard-ui-displaying-all-users-in-a-table-with-actions-to-verify-profiles-approve-users-and-block-users",
+      "title": "Build admin dashboard UI displaying all users in a table with actions to verify profiles, approve users, and block users",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-apply-a-simple-clean-mobile-friendly-design-system-using-blue-as-the-primary-color-with-consistent-typography-spacing-and-component-styling-throughout-the-application",
+      "title": "Apply a simple, clean, mobile-friendly design system using blue as the primary color with consistent typography, spacing, and component styling throughout the application",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "User authentication (sign up and log in)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "User profile creation with name, company, job role, cities, salary range, and experience",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Matching system to find users wanting to swap jobs in same company and role",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Swap request feature (send, accept, reject)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "In-app messaging between matched users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Admin panel to view all users, verify profiles, approve or block users",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Create user profile data model in backend with fields: name, company name, job role, current city, preferred city, salary range, and experience level",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-10",
+      "summary": "Implement matching algorithm in backend that finds users who want to swap jobs where current user's preferred city matches other user's current city, and both share the same company name and job role",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-12",
+      "summary": "Implement swap request system in backend allowing users to send, accept, and reject swap requests with status tracking",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-14",
+      "summary": "Implement in-app messaging system in backend allowing matched users to send and receive text messages with message history storage",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Implement admin role and permissions in backend with ability to view all users, verify profiles, approve users, and block users",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "GoNear",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}
